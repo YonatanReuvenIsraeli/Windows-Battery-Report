@@ -1,7 +1,8 @@
 @echo off
 setlocal
 title CMD Windows Battery Report
-echo Please run this batch file as an administrator.
+echo Please run this batch file as an administrator. Press any key to start.
+pause >nul
 goto :Start
 
 :Start
