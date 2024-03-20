@@ -3,18 +3,18 @@ setlocal
 title CMD Windows Battery Report
 echo Please run this batch file as an administrator. Press any key to start.
 pause >nul
-goto :Start
+goto Start
 
 :Start
 cd /d %SystemDrive%
 cd\
 powercfg /batteryreport
-goto :Open
+goto Open
 
 :Open
 "%SystemDrive%\battery-report.html"
 del "%SystemDrive%\battery-report.html" /f /q
-goto :Done
+goto Done
 
 :Done
 echo.
