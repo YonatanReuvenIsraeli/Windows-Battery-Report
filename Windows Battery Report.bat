@@ -8,12 +8,13 @@ goto Start
 :Start
 cd /d %SystemDrive%
 cd\
+cd Users\c%USERNAME%
 powercfg /batteryreport
 goto Open
 
 :Open
-"%SystemDrive%\battery-report.html"
-del "%SystemDrive%\battery-report.html" /f /q
+"%SystemDrive%\Users\%USERNAMER%\battery-report.html"
+del "%SystemDrive%\Users\%USERNAME%\battery-report.html" /f /q
 goto Done
 
 :Done
