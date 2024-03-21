@@ -8,7 +8,7 @@ goto Start
 :Start
 cd /d %SystemDrive%
 cd\
-cd Users\c%USERNAME%
+cd Users\%USERNAME%
 powercfg /batteryreport
 goto Open
 
