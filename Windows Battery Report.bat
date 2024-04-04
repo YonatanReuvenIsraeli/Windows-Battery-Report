@@ -1,7 +1,7 @@
 @echo off
 setlocal
 title Windows Battery Report
-echo Windows Battery Report v1.0.1
+echo Windows Battery Report v1.0.2
 echo.
 echo Please run this batch file as an administrator. Press any key to start.
 pause >nul
@@ -15,8 +15,8 @@ powercfg /batteryreport
 goto Open
 
 :Open
-"%SystemDrive%\Users\%USERNAMER%\battery-report.html"
-del "%SystemDrive%\Users\%USERNAME%\battery-report.html" /f /q
+"%USERPROFILE%\battery-report.html"
+del "%USERPROFILE%\battery-report.html" /f /q
 goto Done
 
 :Done
