@@ -1,10 +1,10 @@
 @echo off
 setlocal
 title Windows Battery Report
-echo Windows Battery Report v1.0.4
+echo Windows Battery Report v1.0.5
 echo.
 echo Press any key to start.
-pause >nul
+pause > nul
 goto Start
 
 :Start
@@ -22,5 +22,5 @@ goto Done
 :Done
 echo.
 echo Press any key to close this batch file.
-pause >nul
+pause > nul
 exit
