@@ -1,7 +1,11 @@
 @echo off
 setlocal
 title Windows Battery Report
-echo Windows Battery Report v1.0.5
+echo Program Name: Windows Battery Report
+echo Version: 1.1.0
+echo Developer: @YonatanReuvenIsraeli
+echo Website: https://www.yonatanreuvenisraeli.dev
+echo License: GNU General Public License v3.0
 echo.
 echo Press any key to start.
 pause > nul
