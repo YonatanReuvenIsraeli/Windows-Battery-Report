@@ -8,7 +8,7 @@ echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
 echo.
 echo Press any key to start.
-pause > nul
+pause > nul 2>&1
 goto Start
 
 :Start
