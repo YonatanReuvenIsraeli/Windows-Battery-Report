@@ -2,12 +2,12 @@
 setlocal
 title Windows Battery Report
 echo Program Name: Windows Battery Report
-echo Version: 1.2.3
+echo Version: 1.2.4
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
 echo.
-echo Press any key to start.
+echo Press any key to get a windows battery report.
 pause > nul 2>&1
 goto "Start"
 
@@ -17,7 +17,7 @@ cd\
 cd "%USERPROFILE%"
 set BatteryReport=
 if exist "%cd%\battery-report.html" goto "BatteryReportExist"
-powercfg /batteryreport
+powercfg /batteryreport > nul 2>&1
 "%USERPROFILE%\battery-report.html"
 del "%USERPROFILE%\battery-report.html" /f /q
 if "%BatteryReport%"=="True" goto "BatteryReportDone"
