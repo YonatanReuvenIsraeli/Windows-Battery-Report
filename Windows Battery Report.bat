@@ -2,7 +2,7 @@
 setlocal
 title Windows Battery Report
 echo Program Name: Windows Battery Report
-echo Version: 1.2.2
+echo Version: 1.2.3
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -18,7 +18,10 @@ cd "%USERPROFILE%"
 set BatteryReport=
 if exist "%cd%\battery-report.html" goto "BatteryReportExist"
 powercfg /batteryreport
-goto "Open"
+"%USERPROFILE%\battery-report.html"
+del "%USERPROFILE%\battery-report.html" /f /q
+if "%BatteryReport%"=="True" goto "BatteryReportDone"
+goto "Done"
 
 :"BatteryReportExist"
 set BatteryReport=True
