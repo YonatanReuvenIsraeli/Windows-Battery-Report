@@ -1,4 +1,4 @@
-# Windows-Battery-Report v1.2.4
+# Windows-Battery-Report v1.2.5
 Get a Windows battery report.
 
 ## Notes:
