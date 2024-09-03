@@ -2,7 +2,7 @@
 setlocal
 title Windows Battery Report
 echo Program Name: Windows Battery Report
-echo Version: 1.2.7
+echo Version: 1.2.8
 echo Developer: @YonatanReuvenIsraeli
 echo Website: https://www.yonatanreuvenisraeli.dev
 echo License: GNU General Public License v3.0
@@ -20,7 +20,7 @@ if exist "%cd%\battery-report.html" goto "BatteryReportExist"
 powercfg /batteryreport > nul 2>&1
 if not "%errorlevel%"=="0" goto "NoBattery"
 "%cd%\battery-report.html"
-del "%cd%\battery-report.html" /f /q
+del "%cd%\battery-report.html" /f /q > nul 2>&1
 if not "%errorlevel%"=="0" goto "DidNotDelete"
 if "%BatteryReport%"=="True" goto "BatteryReportDone"
 goto "Close"
