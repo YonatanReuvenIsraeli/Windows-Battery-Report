@@ -2,10 +2,11 @@
 setlocal
 title Windows Battery Report
 echo Program Name: Windows Battery Report
-echo Version: 1.2.8
-echo Developer: @YonatanReuvenIsraeli
-echo Website: https://www.yonatanreuvenisraeli.dev
+echo Version: 1.2.9
 echo License: GNU General Public License v3.0
+echo Developer: @YonatanReuvenIsraeli
+echo GitHub: https://github.com/YonatanReuvenIsraeli
+echo Sponsor: https://github.com/sponsors/YonatanReuvenIsraeli 
 echo.
 echo Press any key to get a Windows battery report.
 pause > nul 2>&1
