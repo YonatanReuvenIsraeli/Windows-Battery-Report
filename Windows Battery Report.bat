@@ -2,21 +2,21 @@
 setlocal
 title Windows Battery Report
 echo Program Name: Windows Battery Report
-echo Version: 1.2.10
+echo Version: 1.2.11
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
 echo Sponsor: https://github.com/sponsors/YonatanReuvenIsraeli
 "%windir%\System32\net.exe" user > nul 2>&1
-if not "%errorlevel%"=="0" goto "InWindowsRecoveryEnvironment"
+if not "%errorlevel%"=="0" goto "InWindowsPreinstallationEnvironmentWindowsRecoveryEnvironment"
 echo.
 echo Press any key to get a Windows battery report.
 pause > nul 2>&1
 goto "Start"
 
-:"InWindowsRecoveryEnvironment"
+:"InWindowsPreinstallationEnvironmentWindowsRecoveryEnvironment"
 echo.
-echo Please run this batch file from within Windows. Press any key to close this batch file.
+echo You are in Windows Preinstallation Environment or Windows Recovery Environment! You must run this batch file in Windows. Press any key to close this batch file.
 pause > nul 2>&1
 goto "Done"
 
