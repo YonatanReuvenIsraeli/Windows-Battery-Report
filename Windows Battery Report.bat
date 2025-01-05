@@ -2,15 +2,23 @@
 setlocal
 title Windows Battery Report
 echo Program Name: Windows Battery Report
-echo Version: 1.2.9
+echo Version: 1.2.10
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
-echo Sponsor: https://github.com/sponsors/YonatanReuvenIsraeli 
+echo Sponsor: https://github.com/sponsors/YonatanReuvenIsraeli
+"%windir%\System32\net.exe" user > nul 2>&1
+if not "%errorlevel%"=="0" goto "InWindowsRecoveryEnvironment"
 echo.
 echo Press any key to get a Windows battery report.
 pause > nul 2>&1
 goto "Start"
+
+:"InWindowsRecoveryEnvironment"
+echo.
+echo Please run this batch file from within Windows. Press any key to close this batch file.
+pause > nul 2>&1
+goto "Done"
 
 :"Start"
 cd /d "%SystemDrive%"
@@ -18,7 +26,7 @@ cd\
 cd "%USERPROFILE%"
 set BatteryReport=
 if exist "%cd%\battery-report.html" goto "BatteryReportExist"
-powercfg /batteryreport > nul 2>&1
+"%windir%\System32\powercfg.exe" /batteryreport > nul 2>&1
 if not "%errorlevel%"=="0" goto "NoBattery"
 "%cd%\battery-report.html"
 del "%cd%\battery-report.html" /f /q > nul 2>&1
