@@ -2,7 +2,7 @@
 setlocal
 title Windows Battery Report
 echo Program Name: Windows Battery Report
-echo Version: 1.2.11
+echo Version: 1.2.13
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -24,12 +24,18 @@ goto "Done"
 cd /d "%SystemDrive%"
 cd\
 cd "%USERPROFILE%"
+goto "BatteryReportSet"
+
+:"BatteryReportSet"
 set BatteryReport=
-if exist "%cd%\battery-report.html" goto "BatteryReportExist"
+goto "BatteryReport"
+
+:"BatteryReport"
+if exist "battery-report.html" goto "BatteryReportExist"
 "%windir%\System32\powercfg.exe" /batteryreport > nul 2>&1
 if not "%errorlevel%"=="0" goto "NoBattery"
-"%cd%\battery-report.html"
-del "%cd%\battery-report.html" /f /q > nul 2>&1
+"battery-report.html"
+del "battery-report.html" /f /q > nul 2>&1
 if not "%errorlevel%"=="0" goto "DidNotDelete"
 if "%BatteryReport%"=="True" goto "BatteryReportDone"
 goto "Close"
@@ -37,30 +43,23 @@ goto "Close"
 :"BatteryReportExist"
 set BatteryReport=True
 echo.
-echo Please temporary rename to something else or temporary move to another location "%cd%\battery-report.html" in order for this batch file to proceed. "%cd%\battery-report.html" is not a system file. Press any key to continue when "%cd%\battery-report.html" is renamed to something else or moved to another location. This batch file will let you know when you can rename it back to its original name or move it back to its original location.
+echo Please temporary rename to something else or temporary move to another location "battery-report.html" in order for this batch file to proceed. "battery-report.html" is not a system file. "battery-report.html" is located in the folder you ran this batch file from. Press any key to continue when "battery-report.html" is renamed to something else or moved to another location. This batch file will let you know when you can rename it back to its original name or move it back to its original location.
 pause > nul 2>&1
-goto "Start"
+goto "BatteryReport"
 
 :"NoBattery"
 echo There is no battery on this PC! Press any key to close this batch file.
 pause > nul 2>&1
 goto "Done"
 
-:"BatteryReportExist"
-set BatteryReport=True
-echo.
-echo Please temporary rename to something else or temporary move to another location "%cd%\battery-report.html" in order for this batch file to proceed. "%cd%\battery-report.html" is not a system file. Press any key to continue when "%cd%\battery-report.html" is renamed to something else or moved to another location. This batch file will let you know when you can rename it back to its original name or move it back to its original location.
-pause > nul 2>&1
-goto "Start"
-
 :"DidNotDelete"
 echo.
-echo Error deleting battery report file ("%cd%\battery-report.html")! It may have already been deleted.
+echo Error deleting battery report file ("battery-report.html")! Battery report file ("battery-report.html") was located in the folder you ran this batch file from. It may have already been deleted.
 goto "Close"
 
 :"BatteryReportDone"
 echo.
-echo You can now rename or move back the file back to "%cd%\battery-report.html" Press any key to close this batch file.
+echo You can now rename or move back the file back to "battery-report.html" Press any key to close this batch file.
 pause > nul 2>&1
 goto "Done"
 
