@@ -2,7 +2,7 @@
 setlocal
 title Windows Battery Report
 echo Program Name: Windows Battery Report
-echo Version: 1.2.13
+echo Version: 1.2.14
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -43,7 +43,7 @@ goto "Close"
 :"BatteryReportExist"
 set BatteryReport=True
 echo.
-echo Please temporary rename to something else or temporary move to another location "battery-report.html" in order for this batch file to proceed. "battery-report.html" is not a system file. "battery-report.html" is located in the folder you ran this batch file from. Press any key to continue when "battery-report.html" is renamed to something else or moved to another location. This batch file will let you know when you can rename it back to its original name or move it back to its original location.
+echo Please temporarily rename to something else or temporarily move to another location "battery-report.html" in order for this batch file to proceed. "battery-report.html" is not a system file. "battery-report.html" is located in the folder you ran this batch file from. Press any key to continue when "battery-report.html" is renamed to something else or moved to another location. This batch file will let you know when you can rename it back to its original name or move it back to its original location.
 pause > nul 2>&1
 goto "BatteryReport"
 
