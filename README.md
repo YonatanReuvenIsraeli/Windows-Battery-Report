@@ -1,4 +1,4 @@
-# Windows Battery Report v1.2.13
+# Windows Battery Report v1.2.14
 Get a Windows battery report.
 
 ## Notes:
