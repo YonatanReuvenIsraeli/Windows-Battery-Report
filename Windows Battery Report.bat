@@ -1,8 +1,8 @@
 @echo off
-setlocal
 title Windows Battery Report
+setlocal
 echo Program Name: Windows Battery Report
-echo Version: 1.2.14
+echo Version: 1.2.15
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
