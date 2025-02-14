@@ -2,7 +2,7 @@
 title Windows Battery/Energy Report
 setlocal
 echo Program Name: Windows Battery/Energy Report
-echo Version: 2.0.3
+echo Version: 2.0.4
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -76,14 +76,14 @@ goto "Done"
 :"Duration"
 echo.
 set Duration=
-set /p Duration="Enter the amount of time in seconds you want to run the energy test for. (0-?) "
+set /p Duration="Enter the amount of time in second(s) you want to run the energy test for. (0-?) "
 if /i "%Duration%"=="" set Duration=60
 goto "SureDuration"
 
 :"SureDuration"
 echo.
 set SureDuration=
-set /p SureDuration="Are you sure you want to run the energy test for %Duration% seconds? (Yes/No) "
+set /p SureDuration="Are you sure you want to run the energy test for %Duration% second(s)? (Yes/No) "
 if /i "%SureDuration%"=="Yes" goto "EnergyReportSet"
 if /i "%SureDuration%"=="No" goto "Duration"
 echo Invalid syntax!
@@ -99,6 +99,7 @@ echo.
 "%windir%\System32\powercfg.exe" /energy /duration %Duration%
 if not "%errorlevel%"=="0" goto "Error"
 "energy-report.html"
+echo.
 echo Press any key to delete your energy report and close this batch file.
 pause > nul 2>&1
 del "energy-report.html" /f /q > nul 2>&1
