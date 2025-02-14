@@ -2,7 +2,7 @@
 title Windows Battery/Energy Report
 setlocal
 echo Program Name: Windows Battery/Energy Report
-echo Version: 2.0.6
+echo Version: 2.1.0
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -29,10 +29,26 @@ goto "Done"
 echo.
 set BatteryEnergy=
 set /p BatteryEnergy="Do you want a battery or energy report? (Battery/Energy) "
-if /i "%BatteryEnergy%"=="Battery" goto "BatteryReportSet"
-if /i "%BatteryEnergy%"=="Energy" goto "Duration"
+if /i "%BatteryEnergy%"=="Battery" goto "DurationBattery"
+if /i "%BatteryEnergy%"=="Energy" goto "DurationEnergy"
 echo Invalid syntax!
 goto "Start"
+
+:"DurationBattery
+echo.
+set Duration=
+set /p Duration="Enter the amount of day(s) you want to analyze the battery for. (1-14) "
+if /i "%Duration%"=="" set Duration=7
+goto "SureDurationBattery"
+
+:"SureDurationBattery"
+echo.
+set SureDuration=
+set /p SureDuration="Are you sure you want to run analyze the battery for %Duration% day(s)? (Yes/No) "
+if /i "%SureDuration%"=="Yes" goto "BatteryReportSet"
+if /i "%SureDuration%"=="No" goto "DurationBattery"
+echo Invalid syntax!
+goto "SureDurationBattery"
 
 :"BatteryReportSet"
 set BatteryReport=
@@ -40,8 +56,8 @@ goto "BatteryReport"
 
 :"BatteryReport"
 if exist "battery-report.html" goto "BatteryReportExist"
-"%windir%\System32\powercfg.exe" /batteryreport > nul 2>&1
-if not "%errorlevel%"=="0" goto "NoBattery"
+"%windir%\System32\powercfg.exe" /batteryreport /duration %Duration% > nul 2>&1
+if not "%errorlevel%"=="0" goto "ErrorBattery"
 "battery-report.html"
 echo Press any key to delete your battery report and close this batch file.
 pause > nul 2>&1
@@ -57,10 +73,10 @@ echo Please temporarily rename to something else or temporarily move to another 
 pause > nul 2>&1
 goto "BatteryReport"
 
-:"NoBattery"
-echo There is no battery on this PC! Press any key to close this batch file.
+:"ErrorBattery"
+echo There has been an error! There may not be a battery on this PC Press any key to try again.
 pause > nul 2>&1
-goto "Done"
+goto "BatteryReport"
 
 :"DidNotDeleteBattery"
 echo.
@@ -73,21 +89,21 @@ echo You can now rename or move back the file back to "battery-report.html" Pres
 pause > nul 2>&1
 goto "Done"
 
-:"Duration"
+:"DurationEnergy"
 echo.
 set Duration=
 set /p Duration="Enter the amount of time in second(s) you want to run the energy test for. (0-?) "
 if /i "%Duration%"=="" set Duration=60
-goto "SureDuration"
+goto "SureDurationEnergy"
 
-:"SureDuration"
+:"SureDurationEnergy"
 echo.
 set SureDuration=
 set /p SureDuration="Are you sure you want to run the energy test for %Duration% second(s)? (Yes/No) "
 if /i "%SureDuration%"=="Yes" goto "EnergyReportSet"
-if /i "%SureDuration%"=="No" goto "Duration"
+if /i "%SureDuration%"=="No" goto "DurationEnergy"
 echo Invalid syntax!
-goto "Duration"
+goto "SureDurationEnergy"
 
 :"EnergyReportSet"
 set EnergyReport=
@@ -98,7 +114,7 @@ if exist "energy-report.html" goto "EnergyReportExist"
 echo.
 echo Starting energy test at %Date%%Time%. You will have to wait %Duration% second(s) for the test to be complete. Do not close this batch file.
 "%windir%\System32\powercfg.exe" /energy /duration %Duration% > nul 2>&1
-if not "%errorlevel%"=="0" goto "Error"
+if not "%errorlevel%"=="0" goto "EnergyError"
 "energy-report.html"
 echo Press any key to delete your energy report and close this batch file.
 pause > nul 2>&1
@@ -114,7 +130,7 @@ echo Please temporarily rename to something else or temporarily move to another 
 pause > nul 2>&1
 goto "EnergyReport"
 
-:"Error"
+:"EnergyError"
 echo There has been an error! Press any key to try again.
 pause > nul 2>&1
 goto "EnergyReport"
