@@ -2,7 +2,7 @@
 title Windows Battery/Energy Report
 setlocal
 echo Program Name: Windows Battery/Energy Report
-echo Version: 2.0.1
+echo Version: 2.0.2
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -100,6 +100,7 @@ goto "EnergyReport"
 
 :"EnergyReport"
 if exist "energy-report.html" goto "EnergyReportExist"
+echo.
 "%windir%\System32\powercfg.exe" /energy /duration %Duration%
 if not "%errorlevel%"=="0" goto "Error"
 "energy-report.html"
