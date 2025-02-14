@@ -2,7 +2,7 @@
 title Windows Battery/Energy Report
 setlocal
 echo Program Name: Windows Battery/Energy Report
-echo Version: 2.1.3
+echo Version: 2.1.4
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -44,7 +44,7 @@ if not "%Duration%" LEQ "14" goto "NotInRange"
 goto "SureDurationBattery"
 
 :"NotInRange"
-echo %Duration% must be 1-14 days!
+echo %Duration% is not in range!
 goto "DurationBattery"
 
 :"SureDurationBattery"
