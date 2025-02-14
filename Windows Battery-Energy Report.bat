@@ -2,7 +2,7 @@
 title Windows Battery/Energy Report
 setlocal
 echo Program Name: Windows Battery/Energy Report
-echo Version: 2.1.0
+echo Version: 2.1.1
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -34,7 +34,7 @@ if /i "%BatteryEnergy%"=="Energy" goto "DurationEnergy"
 echo Invalid syntax!
 goto "Start"
 
-:"DurationBattery
+:"DurationBattery"
 echo.
 set Duration=
 set /p Duration="Enter the amount of day(s) you want to analyze the battery for. (1-14) "
