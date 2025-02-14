@@ -2,7 +2,7 @@
 title Windows Battery/Energy Report
 setlocal
 echo Program Name: Windows Battery/Energy Report
-echo Version: 2.0.2
+echo Version: 2.0.3
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -29,17 +29,10 @@ goto "Done"
 echo.
 set BatteryEnergy=
 set /p BatteryEnergy="Do you want a battery or energy report? (Battery/Energy) "
-if /i "%BatteryEnergy%"=="Battery" goto "PathSet"
-if /i "%BatteryEnergy%"=="Energy" goto "PathSet"
-echo Invalid syntax!
-goto "Start"
-
-:"PathSet"
-cd /d "%SystemDrive%"
-cd\
-cd "%USERPROFILE%"
 if /i "%BatteryEnergy%"=="Battery" goto "BatteryReportSet"
 if /i "%BatteryEnergy%"=="Energy" goto "Duration"
+echo Invalid syntax!
+goto "Start"
 
 :"BatteryReportSet"
 set BatteryReport=
@@ -50,6 +43,8 @@ if exist "battery-report.html" goto "BatteryReportExist"
 "%windir%\System32\powercfg.exe" /batteryreport > nul 2>&1
 if not "%errorlevel%"=="0" goto "NoBattery"
 "battery-report.html"
+echo Press any key to delete your battery report and close this batch file.
+pause > nul 2>&1
 del "battery-report.html" /f /q > nul 2>&1
 if not "%errorlevel%"=="0" goto "DidNotDeleteBattery"
 if "%BatteryReport%"=="True" goto "BatteryReportDone"
@@ -69,7 +64,7 @@ goto "Done"
 
 :"DidNotDeleteBattery"
 echo.
-echo Error deleting battery report file ("battery-report.html")! Battery report file ("battery-report.html") was located in the folder you ran this batch file from. It may have already been deleted. Press any key to close this batch file.
+echo Error deleting battery report file ("battery-report.html")! Battery report file ("battery-report.html") is located in the folder you ran this batch file from. It may have already been deleted. Press any key to close this batch file.
 goto "Done"
 
 :"BatteryReportDone"
@@ -104,6 +99,8 @@ echo.
 "%windir%\System32\powercfg.exe" /energy /duration %Duration%
 if not "%errorlevel%"=="0" goto "Error"
 "energy-report.html"
+echo Press any key to delete your energy report and close this batch file.
+pause > nul 2>&1
 del "energy-report.html" /f /q > nul 2>&1
 if not "%errorlevel%"=="0" goto "DidNotDeleteEnergy"
 if "%EnergyReport%"=="True" goto "EnergyReportDone"
@@ -119,11 +116,11 @@ goto "EnergyReport"
 :"Error"
 echo There has been an error! Press any key to try again.
 pause > nul 2>&1
-goto ""
+goto "EnergyReport"
 
 :"DidNotDeleteEnergy"
 echo.
-echo Error deleting energy report file ("energy-report.html")! Energy report file ("energy-report.html") was located in the folder you ran this batch file from. It may have already been deleted. Press any key to close this batch file.
+echo Error deleting energy report file ("energy-report.html")! Energy report file ("energy-report.html") is located in the folder you ran this batch file from. It may have already been deleted. Press any key to close this batch file.
 goto "Done"
 
 :"EnergyReportDone"
