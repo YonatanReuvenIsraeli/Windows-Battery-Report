@@ -2,7 +2,7 @@
 title Windows Battery/Energy Report
 setlocal
 echo Program Name: Windows Battery/Energy Report
-echo Version: 2.1.1
+echo Version: 2.1.2
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -59,6 +59,7 @@ if exist "battery-report.html" goto "BatteryReportExist"
 "%windir%\System32\powercfg.exe" /batteryreport /duration %Duration% > nul 2>&1
 if not "%errorlevel%"=="0" goto "ErrorBattery"
 "battery-report.html"
+echo,
 echo Press any key to delete your battery report and close this batch file.
 pause > nul 2>&1
 del "battery-report.html" /f /q > nul 2>&1
@@ -116,6 +117,7 @@ echo Starting energy test at %Date%%Time%. You will have to wait %Duration% seco
 "%windir%\System32\powercfg.exe" /energy /duration %Duration% > nul 2>&1
 if not "%errorlevel%"=="0" goto "EnergyError"
 "energy-report.html"
+echo.
 echo Press any key to delete your energy report and close this batch file.
 pause > nul 2>&1
 del "energy-report.html" /f /q > nul 2>&1
