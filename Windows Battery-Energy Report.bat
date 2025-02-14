@@ -2,7 +2,7 @@
 title Windows Battery/Energy Report
 setlocal
 echo Program Name: Windows Battery/Energy Report
-echo Version: 2.1.5
+echo Version: 2.1.6
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -39,11 +39,19 @@ echo.
 set Duration=
 set /p Duration="Enter the amount of day(s) you want to analyze the battery for. (1-14) "
 if /i "%Duration%"=="" set Duration=7
-if not %Duration% GEQ 1 goto "NotInRange"
-if not %Duration% LEQ 14 goto "NotInRange"
-goto "SureDurationBattery"
-
-:"NotInRange"
+if /i "%Duration%"=="1" goto "SureDurationBattery"
+if /i "%Duration%"=="2" goto "SureDurationBattery"
+if /i "%Duration%"=="3" goto "SureDurationBattery"
+if /i "%Duration%"=="5" goto "SureDurationBattery"
+if /i "%Duration%"=="6" goto "SureDurationBattery"
+if /i "%Duration%"=="7" goto "SureDurationBattery"
+if /i "%Duration%"=="8" goto "SureDurationBattery"
+if /i "%Duration%"=="9" goto "SureDurationBattery"
+if /i "%Duration%"=="10" goto "SureDurationBattery"
+if /i "%Duration%"=="11" goto "SureDurationBattery"
+if /i "%Duration%"=="12" goto "SureDurationBattery"
+if /i "%Duration%"=="13" goto "SureDurationBattery"
+if /i "%Duration%"=="14" goto "SureDurationBattery"
 echo %Duration% is not in range!
 goto "DurationBattery"
 
