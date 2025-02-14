@@ -2,7 +2,7 @@
 title Windows Battery/Energy Report
 setlocal
 echo Program Name: Windows Battery/Energy Report
-echo Version: 2.1.2
+echo Version: 2.1.3
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -39,7 +39,13 @@ echo.
 set Duration=
 set /p Duration="Enter the amount of day(s) you want to analyze the battery for. (1-14) "
 if /i "%Duration%"=="" set Duration=7
+if not "%Duration%" GEQ "1" goto "NotInRange"
+if not "%Duration%" LEQ "14" goto "NotInRange"
 goto "SureDurationBattery"
+
+:"NotInRange"
+echo %Duration% must be 1-14 days!
+goto "DurationBattery"
 
 :"SureDurationBattery"
 echo.
