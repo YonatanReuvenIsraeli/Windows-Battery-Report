@@ -2,7 +2,7 @@
 title Windows Battery/Energy Report
 setlocal
 echo Program Name: Windows Battery/Energy Report
-echo Version: 2.0.5
+echo Version: 2.0.6
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -96,7 +96,7 @@ goto "EnergyReport"
 :"EnergyReport"
 if exist "energy-report.html" goto "EnergyReportExist"
 echo.
-echo Starting energy test at %Date% %Time%. You will have to wait %Duration% second(s) for the test to be complete. Do not close this batch file.
+echo Starting energy test at %Date%%Time%. You will have to wait %Duration% second(s) for the test to be complete. Do not close this batch file.
 "%windir%\System32\powercfg.exe" /energy /duration %Duration% > nul 2>&1
 if not "%errorlevel%"=="0" goto "Error"
 "energy-report.html"
