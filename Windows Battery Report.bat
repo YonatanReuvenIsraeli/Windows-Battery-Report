@@ -2,17 +2,22 @@
 title Windows Battery/Energy Report
 setlocal
 echo Program Name: Windows Battery/Energy Report
-echo Version: 2.0.0
+echo Version: 2.0.1
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
 echo Sponsor: https://github.com/sponsors/YonatanReuvenIsraeli
+"%windir%\System32\net.exe" session > nul 2>&1
+if not "%errorlevel%"=="0" goto "NotAdministrator"
 "%windir%\System32\net.exe" user > nul 2>&1
 if not "%errorlevel%"=="0" goto "InWindowsPreinstallationEnvironmentWindowsRecoveryEnvironment"
-echo.
-echo Press any key to get a Windows battery report.
-pause > nul 2>&1
 goto "Start"
+
+:"NotAdministrator"
+echo.
+echo Please run this batch file as an administrator. Press any key to close this batch file.
+pause > nul 2>&1
+goto "Close"
 
 :"InWindowsPreinstallationEnvironmentWindowsRecoveryEnvironment"
 echo.
