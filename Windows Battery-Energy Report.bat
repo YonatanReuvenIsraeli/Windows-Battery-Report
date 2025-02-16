@@ -2,7 +2,7 @@
 title Windows Battery/Energy Report
 setlocal
 echo Program Name: Windows Battery/Energy Report
-echo Version: 2.1.12
+echo Version: 2.1.13
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -56,7 +56,7 @@ goto "DurationBattery"
 :"SureDurationBattery"
 echo.
 set SureDuration=
-set /p SureDuration="Are you sure you want to run analyze the battery for %Duration% day(s)? (Yes/No) "
+set /p SureDuration="Are you sure you want to analyze the battery for %Duration% day(s)? (Yes/No) "
 if /i "%SureDuration%"=="Yes" goto "BatteryReportSet"
 if /i "%SureDuration%"=="No" goto "DurationBattery"
 echo Invalid syntax!
