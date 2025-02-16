@@ -101,9 +101,15 @@ echo.
 set Duration=
 set /p Duration="Enter the amount of time in second(s) you want to run the energy test for. (0-?) "
 if /i "%Duration%"=="" set Duration=60
-if not 0 LEQ %Duration% goto "NotInRangeEnergy"
-if not 2147483647 GEQ %Duration% goto "NotInRangeEnergy"
+set /a %Duration% > nul 2>&1
+if not "%errorlevel%=="0" goto "Not32BitEnergy"
+if not %Duration% GEQ 0 goto "NotInRangeEnergy"
+if not %Duration% LEQ 2147483647 goto "NotInRangeEnergy"
 goto "SureDurationEnergy"
+
+:"Not32BitEnergy"
+echo %Duration% is not a 32-bit number! Please try again.
+goto "DurationEnergy"
 
 :"NotInRangeEnergy"
 echo %Duration% is not in range!
