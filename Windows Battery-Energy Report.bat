@@ -1,9 +1,8 @@
-
-@echo off
+@echo off
 title Windows Battery/Energy Report
 setlocal
 echo Program Name: Windows Battery/Energy Report
-echo Version: 2.1.10
+echo Version: 2.1.11
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
