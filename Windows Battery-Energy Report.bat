@@ -1,8 +1,9 @@
+
 @echo off
 title Windows Battery/Energy Report
 setlocal
 echo Program Name: Windows Battery/Energy Report
-echo Version: 2.1.9
+echo Version: 2.1.10
 echo License: GNU General Public License v3.0
 echo Developer: @YonatanReuvenIsraeli
 echo GitHub: https://github.com/YonatanReuvenIsraeli
@@ -39,20 +40,17 @@ echo.
 set Duration=
 set /p Duration="Enter the amount of day(s) you want to analyze the battery for. (1-14) "
 if /i "%Duration%"=="" set Duration=7
-if /i "%Duration%"=="1" goto "SureDurationBattery"
-if /i "%Duration%"=="2" goto "SureDurationBattery"
-if /i "%Duration%"=="3" goto "SureDurationBattery"
-if /i "%Duration%"=="4" goto "SureDurationBattery"
-if /i "%Duration%"=="5" goto "SureDurationBattery"
-if /i "%Duration%"=="6" goto "SureDurationBattery"
-if /i "%Duration%"=="7" goto "SureDurationBattery"
-if /i "%Duration%"=="8" goto "SureDurationBattery"
-if /i "%Duration%"=="9" goto "SureDurationBattery"
-if /i "%Duration%"=="10" goto "SureDurationBattery"
-if /i "%Duration%"=="11" goto "SureDurationBattery"
-if /i "%Duration%"=="12" goto "SureDurationBattery"
-if /i "%Duration%"=="13" goto "SureDurationBattery"
-if /i "%Duration%"=="14" goto "SureDurationBattery"
+set /a %Duration%
+if not "%errorlevel%"=="0" goto "Not32BitBattery"
+if not %Duration% GEQ 1 goto "NotInRangeBattery"
+if not %Duration% LEQ 14 goto "NotInRangeBattery"
+goto "SureDurationBattery"
+
+:"Not32BitBattery"
+ver > nul 2>&1
+goto "DurationBattery"
+
+:"NotInRangeBattery"
 echo %Duration% is not in range!
 goto "DurationBattery"
 
@@ -108,9 +106,21 @@ goto "Done"
 :"DurationEnergy"
 echo.
 set Duration=
-set /p Duration="Enter the amount of time in second(s) you want to run the energy test for. (0-?) "
+set /p Duration="Enter the amount of time in second(s) you want to run the energy test for. (0-2147483647) "
 if /i "%Duration%"=="" set Duration=60
+set /a %Duration%
+if not "%errorlevel%"=="0" goto "Not32BitEnergy"
+if not %Duration% GEQ 0 goto "NotInRangeEnergy"
+if not %Duration% LEQ 2147483647 goto "NotInRangeEnergy"
 goto "SureDurationEnergy"
+
+:"Not32BitEnergy"
+ver > nul 2>&1
+goto "DurationEnergy"
+
+:"NotInRangeEnergy"
+echo %Duration% is not in range!
+goto "DurationEnergy"
 
 :"SureDurationEnergy"
 echo.
