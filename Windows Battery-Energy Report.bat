@@ -1,4 +1,4 @@
-@echo off
+@echo off
 title Windows Battery/Energy Report
 setlocal
 echo Program Name: Windows Battery/Energy Report
