@@ -40,10 +40,14 @@ set Duration=
 set /p Duration="Enter the amount of day(s) you want to analyze the battery for. (1-14) "
 if /i "%Duration%"=="" set Duration=7
 set /a %Duration%
-if not "%errorlevel%"=="0" goto "DurationBattery"
+if not "%errorlevel%"=="0" goto "Not32BitBattery"
 if not %Duration% GEQ 1 goto "NotInRangeBattery"
 if not %Duration% LEQ 14 goto "NotInRangeBattery"
 goto "SureDurationBattery"
+
+:"Not32BitBattery"
+ver > nul 2>&1
+goto "DurationBattery"
 
 :"NotInRangeBattery"
 echo %Duration% is not in range!
@@ -104,10 +108,14 @@ set Duration=
 set /p Duration="Enter the amount of time in second(s) you want to run the energy test for. (0-?) "
 if /i "%Duration%"=="" set Duration=60
 set /a %Duration%
-if not "%errorlevel%"=="0" goto "DurationEnergy"
+if not "%errorlevel%"=="0" goto "Not32BitEnergy"
 if not %Duration% GEQ 0 goto "NotInRangeEnergy"
 if not %Duration% LEQ 2147483647 goto "NotInRangeEnergy"
 goto "SureDurationEnergy"
+
+:"Not32BitEnergy"
+ver > nul 2>&1
+goto "DurationEnergy"
 
 :"NotInRangeEnergy"
 echo %Duration% is not in range!
